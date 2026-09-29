@@ -1169,3 +1169,6 @@ assert_type(np.ma.stack([MAR_2d_f4, MAR_2d_f4], dtype=np.int8), _MArray3D[np.int
 assert_type(np.ma.stack([MAR_f4, MAR_f4], out=AR_f4), MaskedArray[np.float32])
 assert_type(np.ma.stack([MAR_1d_f4, MAR_1d_f4], out=AR_2d_f4), _MArray2D[np.float32])
 assert_type(np.ma.stack([MAR_f4, MAR_f4], 0, AR_2d_f4), _MArray2D[np.float32])
+
+assert_type(np.ma.mask_or(MAR_b.mask, MAR_b.mask), NDArray[np.bool] | np.bool)
+assert_type(np.ma.mask_or(MAR_b.mask, MAR_b.mask, shrink=False), NDArray[np.bool] | np.bool)

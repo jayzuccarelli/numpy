@@ -35,6 +35,7 @@ AR_LIKE_m = [np.timedelta64(1, "D")]
 AR_LIKE_M = [np.datetime64(1, "D")]
 
 MAR_f.mask = AR_b
+MAR_f.mask = AR_LIKE_i
 MAR_f.mask = np.False_
 
 MAR_i.fill_value = 0
@@ -197,3 +198,12 @@ MAR_c **= AR_LIKE_c
 
 # https://github.com/numpy/numpy/issues/31737
 np.ma.masked_array([1])
+
+# integer masks are accepted at runtime (via `make_mask`)
+np.ma.masked_array([1, 2, 3], mask=[0, 1, 0])
+np.ma.array([1, 2, 3], mask=[0, 1, 0])
+np.ma.MaskedArray([1, 2, 3], mask=np.array([0, 1, 0]))
+np.ma.fix_invalid([1.0, np.nan], mask=[1, 0])
+MAR_i.__setmask__(AR_LIKE_i)
+
+np.ma.mask_or(MAR_b.mask, MAR_b.mask)
